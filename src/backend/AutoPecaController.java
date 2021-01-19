@@ -56,6 +56,9 @@ public class AutoPecaController {
 			
 			List<AutoPeca> pecas = new ArrayList<AutoPeca>();
 			
+			//Nada encontrado.
+			if(!result.next()) return null;
+			
 			while(result.next()) {
 				
 				int cod = result.getInt("codigo");
@@ -93,7 +96,8 @@ public class AutoPecaController {
 			
 			result = stmt.executeQuery();
 			
-			result.next();
+			//Nada encontrado.
+			if(!result.next()) return null;
 			
 			int cod = result.getInt("codigo");
 			String nome = result.getString("nome");
@@ -108,7 +112,6 @@ public class AutoPecaController {
 			return new AutoPeca(cod, nome, preco, descricao, qtd);
 		}
 		catch(SQLException e) { e.printStackTrace(); }
-		
 		
 		return null;
 	}
@@ -129,11 +132,11 @@ public class AutoPecaController {
 			stmt.setInt(1, codigo);
 			
 			stmt.execute();
-
+			
 			stmt.close();
 			connection.close();
 
-			System.out.println("Peça com código: " + codigo + " foi excluída com sucesso.");
+			System.out.println("Operação realizada com sucesso.");
 		}
 		catch(SQLException e) { e.printStackTrace(); }
 

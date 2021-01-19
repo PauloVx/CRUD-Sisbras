@@ -8,6 +8,8 @@ import models.AutoPeca;
 public class MainTest {
 	public static void main(String[] args) {
 		
+		//Classe de teste, será deletada.
+		
 		Scanner input = new Scanner(System.in);
 		
 		System.out.print("Insira o codigo da peça a ser deletada: ");
@@ -24,7 +26,7 @@ public class MainTest {
 		//else System.out.println(peca.toString());
 		
 		//Deletar
-		AutoPecaController.excluirPeca(codigo);
+		//AutoPecaController.excluirPeca(codigo);
 
 		
 		input.close();
