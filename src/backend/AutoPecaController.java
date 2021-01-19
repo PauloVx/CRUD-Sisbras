@@ -31,7 +31,7 @@ public class AutoPecaController {
 			stmt.setInt(4, autoPeca.getQtdEmEstoque());
 			
 			stmt.execute();
-			System.out.println("Nova peça inserida com sucesso");
+			System.out.println("Nova peï¿½a inserida com sucesso");
 			
 			stmt.close();
 			connection.close();
@@ -111,5 +111,31 @@ public class AutoPecaController {
 		
 		
 		return null;
+	}
+	
+	public static void atualizarPeca(AutoPeca p) {
+		
+	}
+	
+	public static void excluirPeca(int codigo) {
+		Connection connection = DatabaseController.getConnection();
+		PreparedStatement stmt;
+
+		String query = "DELETE FROM autopecas WHERE codigo=?";
+
+		try {
+			stmt = connection.prepareStatement(query);
+
+			stmt.setInt(1, codigo);
+			
+			stmt.execute();
+
+			stmt.close();
+			connection.close();
+
+			System.out.println("Peça com código: " + codigo + " foi excluída com sucesso.");
+		}
+		catch(SQLException e) { e.printStackTrace(); }
+
 	}
 }

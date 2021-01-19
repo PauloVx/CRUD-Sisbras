@@ -10,7 +10,7 @@ public class MainTest {
 		
 		Scanner input = new Scanner(System.in);
 		
-		System.out.print("Insira o codigo da peça: ");
+		System.out.print("Insira o codigo da peça a ser deletada: ");
 		int codigo = input.nextInt();
 		
 		//Obter todas
@@ -19,9 +19,12 @@ public class MainTest {
 		//}
 		
 		//Obter uma
-		AutoPeca peca = AutoPecaController.listarUnicaPeca(codigo);
-		if(peca == null) System.out.println("Não foi encontrada nenhuma peca com o codigo.");
-		else System.out.println(peca.toString());
+		//AutoPeca peca = AutoPecaController.listarUnicaPeca(codigo);
+		//if(peca == null) System.out.println("Não foi encontrada nenhuma peca com o codigo.");
+		//else System.out.println(peca.toString());
+		
+		//Deletar
+		AutoPecaController.excluirPeca(codigo);
 
 		
 		input.close();

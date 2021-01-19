@@ -36,7 +36,7 @@ public class AutoPeca {
 	public String toString() {
 		return "Cod: " + this.codigo + " " +
 				"Nome: " + this.nome + " " +
-				"Preço: " + this.preco + "R$ " +
+				"Preço: " + String.format("%.2f", this.preco) + "R$ " +
 				"Descrição: " + this.descricao + " " +
 				"Qtd em estoque: " + this.qtdEmEstoque + " Unidades";
 	}
