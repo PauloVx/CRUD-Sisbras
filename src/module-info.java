@@ -6,4 +6,5 @@
  *
  */
 module crud_sisbras {
+	requires java.sql;
 }
