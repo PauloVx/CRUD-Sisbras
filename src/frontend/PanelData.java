@@ -8,6 +8,6 @@ import javax.swing.JPanel;
 public class PanelData extends JPanel {
 
 	public PanelData() {
-		setBackground(Color.RED);
+		setBackground(Color.WHITE);
 	}
 }
