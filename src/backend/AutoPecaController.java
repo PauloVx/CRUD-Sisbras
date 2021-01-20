@@ -120,7 +120,7 @@ public class AutoPecaController {
 		
 	}
 	
-	public static void excluirPeca(int codigo) {
+	public static boolean excluirPeca(int codigo) {
 		Connection connection = DatabaseController.getConnection();
 		PreparedStatement stmt;
 
@@ -131,7 +131,10 @@ public class AutoPecaController {
 
 			stmt.setInt(1, codigo);
 			
-			stmt.execute();
+			int linhasAfetadas = stmt.executeUpdate();
+			
+			//Excluiu
+			if(linhasAfetadas > 0 ) return true;
 			
 			stmt.close();
 			connection.close();
@@ -140,5 +143,7 @@ public class AutoPecaController {
 		}
 		catch(SQLException e) { e.printStackTrace(); }
 
+		//Nada encontrado
+		return false;
 	}
 }
