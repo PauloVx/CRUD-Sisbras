@@ -1,19 +1,22 @@
 package frontend;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
 public class Frame extends JFrame {
+	
 
-	public Frame(int x, int y, String titulo) {
+	public Frame(int x, int y, String titulo, boolean visivel) {
 		
 		organizarLayout();
 		
 		setTitle(titulo);
-		setVisible(true);
+		setVisible(visivel);
 		setSize(x, y);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
@@ -24,7 +27,7 @@ public class Frame extends JFrame {
 		this.setLayout(new BorderLayout());
 		
 		PanelButtons panelButtons = new PanelButtons();
-		PanelData panelData = new PanelData();
+		PanelData panelData = new PanelData(Color.WHITE);
 		
 		panelButtons.setPreferredSize(new Dimension(160, 540));
 		
@@ -32,4 +35,5 @@ public class Frame extends JFrame {
 		this.add(panelData, BorderLayout.CENTER);
 		
 	}
+	
 }

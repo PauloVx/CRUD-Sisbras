@@ -56,9 +56,6 @@ public class AutoPecaController {
 			
 			List<AutoPeca> pecas = new ArrayList<AutoPeca>();
 			
-			//Nada encontrado.
-			if(!result.next()) return null;
-			
 			while(result.next()) {
 				
 				int cod = result.getInt("codigo");
