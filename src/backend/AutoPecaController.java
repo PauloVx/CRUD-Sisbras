@@ -113,8 +113,35 @@ public class AutoPecaController {
 		return null;
 	}
 	
-	public static void atualizarPeca(AutoPeca p) {
+	public static boolean atualizarPeca(int codigo, AutoPeca novaPeca) {
+		Connection connection = DatabaseController.getConnection();
+		PreparedStatement stmt;
 		
+		String query = "UPDATE autopecas SET nome=?, preco=?, descricao=?, qtd_estoque=? WHERE codigo=?";
+		
+		try {
+			stmt = connection.prepareStatement(query);
+
+			stmt.setString(1, novaPeca.getNome());
+			stmt.setFloat(2, novaPeca.getPreco());
+			stmt.setString(3, novaPeca.getDescricao());
+			stmt.setInt(4, novaPeca.getQtdEmEstoque());
+			stmt.setInt(5, novaPeca.getCodigo());
+			
+			int linhasAfetadas = stmt.executeUpdate();
+			
+			//Atualizou
+			if(linhasAfetadas > 0 ) return true;
+			
+			stmt.close();
+			connection.close();
+
+			System.out.println("Operação realizada com sucesso.");
+		}
+		catch(SQLException e) { e.printStackTrace(); }
+
+		//Nada encontrado
+		return false;
 	}
 	
 	public static boolean excluirPeca(int codigo) {

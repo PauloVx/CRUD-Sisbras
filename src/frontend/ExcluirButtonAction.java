@@ -89,7 +89,10 @@ public class ExcluirButtonAction implements ActionListener {
 				boolean sucesso = AutoPecaController.excluirPeca(codigo);
 				
 				if(sucesso) JOptionPane.showMessageDialog(null, "Peça excluída com sucesso.", "Sucesso", 1);
-				else JOptionPane.showMessageDialog(null, "Nenhuma peça encontrada com o código informado.", "Não encontrado", 1);
+				else {
+					JOptionPane.showMessageDialog(null, "Nenhuma peça encontrada com o código informado.", "Não encontrado", 1);
+					return;
+				}
 				
 				frame.dispose();
 				PanelData.updateTable();
