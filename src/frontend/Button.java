@@ -15,8 +15,6 @@ public class Button extends JButton {
 		this.setOpaque(true);
 		this.setBackground(cor);
 		
-		this.setPreferredSize(new Dimension(5, 5));
-		
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		this.setFont(new Font("sans-seriff", Font.BOLD, tamanhoFonte));

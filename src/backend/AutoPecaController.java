@@ -31,7 +31,7 @@ public class AutoPecaController {
 			stmt.setInt(4, autoPeca.getQtdEmEstoque());
 			
 			stmt.execute();
-			System.out.println("Nova pe�a inserida com sucesso");
+			System.out.println("Nova peca inserida com sucesso");
 			
 			stmt.close();
 			connection.close();

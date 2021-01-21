@@ -2,7 +2,6 @@ package frontend;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -10,17 +9,32 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class Frame extends JFrame {
 	
-
-	public Frame(int x, int y, String titulo, boolean visivel) {
+	//Tela inicial.
+	public Frame(String titulo, boolean visivel) {
 		
-		organizarLayout();
+		this.organizarLayout();
 		
-		setTitle(titulo);
-		setVisible(visivel);
-		setSize(x, y);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
-		setLocationRelativeTo(null);
+		this.setTitle(titulo);
+		
+		this.setExtendedState(MAXIMIZED_BOTH); 
+		this.setVisible(visivel);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setResizable(true);
+		this.setLocationRelativeTo(null);
+	}
+	
+	//Outras telas.
+	public Frame(int x, int y, String titulo) {
+		
+		this.setLayout(new BorderLayout());
+		
+		this.setTitle(titulo);
+		this.setVisible(true);
+		this.setSize(x, y);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setResizable(true);
+		this.setLocationRelativeTo(null);
+		
 	}
 
 	private void organizarLayout() {

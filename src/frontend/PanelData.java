@@ -16,7 +16,7 @@ import models.AutoPeca;
 @SuppressWarnings("serial")
 public class PanelData extends JPanel {
 
-	//Mostra a lista de peças
+	//Mostra a tabela de peças
 	public PanelData(Color color) {
 		this.setBackground(color);
 		
@@ -33,20 +33,13 @@ public class PanelData extends JPanel {
 			   int qtd = peca.getQtdEmEstoque();
 			   String descricao = peca.getDescricao();
 
-			   Object[] data = { cod, nome, preco, qtd, descricao };
+			   Object[] data = { cod, nome, preco + "R$", qtd + " Un", descricao };
 
 			   tableModel.addRow(data);
 		}
 		
 		
 		JTable table = new JTable(tableModel);
-		
-		//ResultSet lista = AutoPecaController.listarTodasAsPecas();
-		//if(lista.isBeforeFirst())
-		//{
-		//	table.setModel(TableModel.resultSetToTableModel(lista));
-		//}
-		
 		
 		//Desabilitando edição
 		table.setDefaultEditor(Object.class, null);
