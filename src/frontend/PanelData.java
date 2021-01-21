@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.sql.ResultSet;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -15,16 +16,18 @@ import models.AutoPeca;
 
 @SuppressWarnings("serial")
 public class PanelData extends JPanel {
+	
+	private static String[] colunas = {"Cód", "Nome", "Preço", "Qtd", "Descrição"};
+	
+	private static DefaultTableModel tableModel = new DefaultTableModel(colunas, 0);
+	
+	private static JTable table = new JTable(tableModel);
 
 	//Mostra a tabela de peças
 	public PanelData(Color color) {
 		this.setBackground(color);
 		
 		this.setLayout(new GridLayout());
-		
-		String[] colunas = {"Cód", "Nome", "Preço", "Qtd", "Descrição"};
-		
-		DefaultTableModel tableModel = new DefaultTableModel(colunas, 0);
 		
 		for (AutoPeca peca : AutoPecaController.listarTodasAsPecas()) {
 			   int cod = peca.getCodigo();
@@ -39,8 +42,6 @@ public class PanelData extends JPanel {
 		}
 		
 		
-		JTable table = new JTable(tableModel);
-		
 		//Desabilitando edição
 		table.setDefaultEditor(Object.class, null);
 		table.getTableHeader().setReorderingAllowed(false);
@@ -50,4 +51,21 @@ public class PanelData extends JPanel {
 		this.add(barraRolagem);
 		
 	}
+	
+	public static void updateTable() { 
+		tableModel.setRowCount(0);
+		for (AutoPeca peca : AutoPecaController.listarTodasAsPecas()) {
+			int cod = peca.getCodigo();
+			String nome = peca.getNome();
+			float preco = peca.getPreco();
+			int qtd = peca.getQtdEmEstoque();
+			String descricao = peca.getDescricao();
+
+			Object[] data = { cod, nome, preco + "R$", qtd + " Un", descricao };
+
+			tableModel.addRow(data);
+		}
+		table.setModel(tableModel);
+		tableModel.fireTableDataChanged();
+	} 
 }
