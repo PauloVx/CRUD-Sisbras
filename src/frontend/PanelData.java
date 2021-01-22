@@ -2,14 +2,11 @@ package frontend;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.sql.ResultSet;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import backend.AutoPecaController;
 import models.AutoPeca;

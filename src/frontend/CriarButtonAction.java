@@ -4,13 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -63,13 +59,14 @@ public class CriarButtonAction implements ActionListener {
         precoLabel.setSize(100, 20); 
         precoLabel.setLocation(130, 140); 
         panelForm.add(precoLabel); 
-  
-        JTextField precoTextField = new JTextField(); 
+
+        JTextField precoTextField = new JTextField();
+        
         precoTextField.setFont(new Font("Arial", Font.PLAIN, 15)); 
         precoTextField.setSize(190, 20); 
         precoTextField.setLocation(200, 140); 
         panelForm.add(precoTextField);
-        //----------------------------
+        //---------------------------
         
         //Campo quantidade
         JLabel qtdLabel = new JLabel("Qtd: "); 
@@ -109,13 +106,35 @@ public class CriarButtonAction implements ActionListener {
 		
 		//Button actions
 		buttonCadastrar.addActionListener(new ActionListener() {
+			String nome;
+			float preco;
+			int qtd;
+			String descricao;
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String nome = nomeTextField.getText();
-				float preco = Float.parseFloat(precoTextField.getText());
-				int qtd = Integer.parseInt(qtdTextField.getText());
-				String descricao = descricaoTextArea.getText();
+				
+				if(nomeTextField.getText().isEmpty() ||
+						precoTextField.getText().isEmpty() ||
+						qtdTextField.getText().isEmpty() ||
+						descricaoTextArea.getText().isEmpty()
+					) {
+						JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos", "Erro", 1);
+						return;
+					}
+				
+				//Validação
+				try {
+					preco = Float.parseFloat(precoTextField.getText());
+					qtd = Integer.parseInt(qtdTextField.getText());
+				}
+				catch(NumberFormatException err) {
+					JOptionPane.showMessageDialog(null, "Por favor, verifique os campos.", "Valor Inválido para um dos Campos", 1);
+					return;
+				}
+				
+				nome = nomeTextField.getText();
+				descricao = descricaoTextArea.getText();
 				
 				AutoPeca peca = new AutoPeca(nome, preco, descricao, qtd);
 				

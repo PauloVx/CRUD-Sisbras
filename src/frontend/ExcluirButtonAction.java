@@ -6,19 +6,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.text.NumberFormat;
 
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.text.NumberFormatter;
 
 import backend.AutoPecaController;
-import models.AutoPeca;
 
 public class ExcluirButtonAction implements ActionListener {
 
@@ -51,14 +45,7 @@ public class ExcluirButtonAction implements ActionListener {
         codigoLabel.setLocation(110, 100); 
         panelForm.add(codigoLabel); 
         
-        NumberFormat longFormat = NumberFormat.getIntegerInstance();
-
-        NumberFormatter numberFormatter = new NumberFormatter(longFormat);
-        numberFormatter.setValueClass(Long.class); //optional, ensures you will always get a long value
-        numberFormatter.setAllowsInvalid(false); //this is the key!!
-        numberFormatter.setMinimum(0l); //Optional
-
-        JFormattedTextField codigoTextField = new JFormattedTextField(numberFormatter);
+        JTextField codigoTextField = new JTextField();
         
         codigoTextField.setFont(new Font("Arial", Font.PLAIN, 15)); 
         codigoTextField.setSize(190, 20); 
@@ -84,7 +71,15 @@ public class ExcluirButtonAction implements ActionListener {
 					return;
 				}
 				
-				int codigo = Integer.parseInt(codigoTextField.getText());
+				int codigo;
+				
+				try {
+					codigo = Integer.parseInt(codigoTextField.getText());
+				}
+				catch(NumberFormatException err) {
+					JOptionPane.showMessageDialog(null, "Por favor, informe um código válido.", "Código Inválido", 1);
+					return;
+				}
 				
 				boolean sucesso = AutoPecaController.excluirPeca(codigo);
 				

@@ -6,15 +6,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.text.NumberFormatter;
 
 import backend.AutoPecaController;
 import models.AutoPeca;
@@ -50,13 +47,7 @@ Frame frame = new Frame(600, 540, "Atualizar Peça");
         codigoLabel.setLocation(120, 100); 
         panelForm.add(codigoLabel); 
         
-        NumberFormat longFormat = NumberFormat.getIntegerInstance();
-
-        NumberFormatter numberFormatter = new NumberFormatter(longFormat);
-        numberFormatter.setValueClass(Long.class);
-        numberFormatter.setAllowsInvalid(false);
-
-        JFormattedTextField codigoTextField = new JFormattedTextField(numberFormatter);
+        JTextField codigoTextField = new JTextField();
         
         codigoTextField.setFont(new Font("Arial", Font.PLAIN, 15)); 
         codigoTextField.setSize(190, 20); 
@@ -132,6 +123,11 @@ Frame frame = new Frame(600, 540, "Atualizar Peça");
 		
 		//Button actions
 		buttonAtualizar.addActionListener(new ActionListener() {
+			int codigo;
+			String nome;
+			float preco;
+			int qtd;
+			String descricao;
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -145,11 +141,19 @@ Frame frame = new Frame(600, 540, "Atualizar Peça");
 						return;
 					}
 				
-				int codigo = Integer.parseInt(codigoTextField.getText());
-				String nome = nomeTextField.getText();
-				float preco = Float.parseFloat(precoTextField.getText());
-				int qtd = Integer.parseInt(qtdTextField.getText());
-				String descricao = descricaoTextArea.getText();
+				//Validação
+				try {
+					codigo = Integer.parseInt(codigoTextField.getText());
+					preco = Float.parseFloat(precoTextField.getText());
+					qtd = Integer.parseInt(qtdTextField.getText());
+				}
+				catch(NumberFormatException err) {
+					JOptionPane.showMessageDialog(null, "Por favor, verifique os campos.", "Valor Inválido para um dos Campos", 1);
+					return;
+				}
+				
+				nome = nomeTextField.getText();
+				descricao = descricaoTextArea.getText();
 				
 				AutoPeca peca = new AutoPeca(codigo, nome, preco, descricao, qtd);
 				
@@ -163,6 +167,7 @@ Frame frame = new Frame(600, 540, "Atualizar Peça");
 		});
 		
 		buttonProcurar.addActionListener(new ActionListener() {
+			int codigo;
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -172,8 +177,14 @@ Frame frame = new Frame(600, 540, "Atualizar Peça");
 					return;
 				}
 				
-				
-				int codigo = Integer.parseInt(codigoTextField.getText());
+				//Validação
+				try {
+					codigo = Integer.parseInt(codigoTextField.getText());
+				}
+				catch(NumberFormatException err) {
+					JOptionPane.showMessageDialog(null, "Por favor, informe um código válido.", "Código Inválido", 1);
+					return;
+				}
 				
 				AutoPeca pecaAntiga = AutoPecaController.listarUnicaPeca(codigo);
 				
