@@ -1,0 +1,10 @@
+
+CREATE DATABASE crudsisbras;
+
+CREATE TABLE IF NOT EXISTS autopecas(
+	codigo SERIAL PRIMARY KEY,
+	nome VARCHAR(50) NOT NULL,
+  	preco FLOAT NOT NULL,
+  	descricao VARCHAR(100) NOT NULL,
+  	qtd_estoque INTEGER NOT NULL
+);
